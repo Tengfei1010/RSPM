@@ -1,0 +1,6 @@
+flask
+celery
+requests
+BeautifulSoup4
+lxml
+mongoengine
