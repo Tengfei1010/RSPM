@@ -86,7 +86,6 @@ class WhatWeb(object):
     def _scan_proc(self, args):
         proc = None
         args.insert(0, self._whatweb_path)
-        print(args)
         try:
             proc = subprocess.Popen(args,
                                     stdout=subprocess.PIPE,
@@ -108,7 +107,10 @@ class WhatWeb(object):
         if whatweb_output:
             try:
                 whatweb_output = whatweb_output.decode('utf8')
-                return json.loads(whatweb_output, encoding='utf-8')
+                items = whatweb_output.split('\n')
+                if len(items) > 2:
+                    whatweb_output = items[0]
+                return json.loads(whatweb_output, encoding='utf8')
 
             except:
                 if whatweb_err:
@@ -117,7 +119,8 @@ class WhatWeb(object):
                     raise
 
         elif whatweb_err:
-            raise WhatWebError(whatweb_err.decode('utf8'))
+            print(WhatWebError(whatweb_err.decode('utf8')))
+            return {}
 
     def _get_scan_args(self, targets, arguments):
         assert isinstance(targets, (

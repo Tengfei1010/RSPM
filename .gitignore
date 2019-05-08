@@ -22,3 +22,7 @@ rspm.egg-info/
 
 # venv
 venv/
+
+# ignore txt
+*.txt
+*/*/*.txt

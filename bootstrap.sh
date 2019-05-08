@@ -19,3 +19,10 @@ sudo apt-get update
 
 sudo apt-get install -y mongodb-org
 
+# start mongod service
+sudo service mongod start
+
+# install nmap
+
+sudo apt install nmap
+

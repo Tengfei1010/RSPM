@@ -17,8 +17,10 @@ def call_whatweb(url):
 
 
 @celery.task()
-def call_nmap():
-    return "call nmap"
+def call_nmap_port_scan(ip):
+    from rspm.third_library.nmap.wrapper import port_scanner
+    port_result = port_scanner(ip)
+    return {TaskType.NMAP: port_result}
 
 
 @celery.task()
@@ -26,3 +28,8 @@ def call_cmsscan(url):
     from rspm.third_library.cmsscan.wrapper import cms_scan
     result = cms_scan(url)
     return {TaskType.CMS: result}
+
+
+@celery.task()
+def call_webdir_scan(url):
+    pass
